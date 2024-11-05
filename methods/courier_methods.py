@@ -25,6 +25,24 @@ class CourierMethods:
             'login': login_pass[0],
             'password': login_pass[1],
         }
+        response = requests.post(f'{URLs.BASE_URL}{URLs.COURIER_LOGIN_URL}', json=payload)
+        return response
+
+    @allure.step("Вход с учетными данными login_pass c пустым паролем")
+    def post_login_courier_without_password(self, login_pass):
+        payload = {
+            'login': login_pass[0],
+            'password': ''
+        }
+        response = requests.post(f'{URLs.BASE_URL}{URLs.COURIER_LOGIN_URL}', data=payload)
+        return response
+
+    @allure.step("Вход с учетными данными login_pass с пустым логином")
+    def post_login_courier_without_login(self, login_pass):
+        payload = {
+            'login': '',
+            'password': login_pass[1]
+        }
         response = requests.post(f'{URLs.BASE_URL}{URLs.COURIER_LOGIN_URL}', data=payload)
         return response
 
